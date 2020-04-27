@@ -25,10 +25,21 @@ In [1]: NAT = "ip nat inside source list ACL interface FastEthernet0/1 overload"
 In [2]: NAT.replace('Fast', 'Gigabit')                                                                               
 Out[2]: 'ip nat inside source list ACL interface GigabitEthernet0/1 overload'
 
-In [3]:  
 
 
-    
+второй вариант
+
+
+In [12]: NAT = "ip nat inside source list ACL interface FastEthernet0/1 overload"                                    
+In [13]: temp = NAT.split()                                                                                          
+
+In [14]: temp[7] = 'GigabitEthernet0/1'                                                                              
+
+In [15]: ' '.join(temp)                                                                                              
+Out[15]: 'ip nat inside source list ACL interface GigabitEthernet0/1 overload'
+
+
+
 
 Задание 4.2
 ~~~~~~~~~~~
@@ -43,6 +54,14 @@ XXXX.XXXX.XXXX
 
     mac = 'AAAA:BBBB:CCCC'
 
+
+In [18]: mac = 'AAAA:BBBB:CCCC'                                                                                      
+
+In [19]: mac.replace(':',".")                                                                                        
+Out[19]: 'AAAA.BBBB.CCCC'
+
+   
+
 Задание 4.3
 ~~~~~~~~~~~
 
@@ -55,6 +74,19 @@ XXXX.XXXX.XXXX
 .. code:: python
 
     config = 'switchport trunk allowed vlan 1,3,10,20,30,100'
+
+
+
+In [27]: config                                                                                                      
+Out[27]: 'switchport trunk allowed vlan 1,3,10,20,30,100'
+
+In [28]: vlans = config.split() [4]                                                                                  
+
+In [29]: vlans                                                                                                       
+Out[29]: '1,3,10,20,30,100'
+
+
+
 
 Задание 4.4
 ~~~~~~~~~~~
@@ -72,6 +104,19 @@ XXXX.XXXX.XXXX
     vlans = [10, 20, 30, 1, 2, 100, 10, 30, 3, 4, 10]
 
 
+In [69]: vlans = [10, 20, 30, 1, 2, 100, 10, 30, 3, 4, 10]                                                           
+
+In [70]: temp = set(vlans)                                                                                           
+
+In [71]: vlans = list(temp)                                                                                          
+
+In [72]: vlans.sort()                                                                                                
+
+In [73]: vlans                                                                                                       
+Out[73]: [1, 2, 3, 4, 10, 20, 30, 100]
+
+
+
 Задание 4.5
 ~~~~~~~~~~~
 
@@ -87,6 +132,29 @@ XXXX.XXXX.XXXX
     command1 = 'switchport trunk allowed vlan 1,2,3,5,8'
     command2 = 'switchport trunk allowed vlan 1,3,8,9'
 
+
+In [133]: command1 = 'switchport trunk allowed vlan 1,2,3,5,8'                                                       
+
+In [134]: command2 = 'switchport trunk allowed vlan 1,3,8,9'                                                         
+
+In [135]: command1 = command1[30:].split(',')                                                                        
+
+In [136]: command2 = command2[30:].split(',')                                                                        
+
+In [137]: temp1 = set(command1)                                                                                      
+
+In [138]: temp2 = set(command2)                                                                                      
+
+In [140]: temp1 & temp2                                                                                              
+Out[140]: {'1', '3', '8'}
+
+In [141]: vlans = list (temp1 & temp2)                                                                               
+
+In [142]: vlans                                                                                                      
+Out[142]: ['1', '3', '8']
+
+    
+    
 Задание 4.6
 ~~~~~~~~~~~
 

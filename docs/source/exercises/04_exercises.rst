@@ -177,6 +177,31 @@ Out[142]: ['1', '3', '8']
 
     ospf_route = 'O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
 
+
+In [1]: ospf_route = 'O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'   
+
+In [2]: temp = ospf_route.split()                                                             
+In [3]: template = ''' 
+   ...: Protocol:\t\t\t{0} 
+   ...: Prefix:\t\t\t\t{1} 
+   ...: AD/Metric:\t\t\t{2} 
+   ...: Next-hop:\t\t\t{3} 
+   ...: Last update:\t\t\t{4} 
+   ...: Outbound Interface:\t\t{5} 
+   ...: '''
+
+
+In [8]: print (template.format('OSPF', temp[1], temp[2].strip('[]'), temp[4], temp[5], temp[6]))    
+
+Protocol:           OSPF
+Prefix:             10.0.24.0/24
+AD/Metric:          110/41
+Next-hop:           10.0.13.3,
+Last update:            3d18h,
+Outbound Interface:     FastEthernet0/0
+
+
+
 Задание 4.7
 ~~~~~~~~~~~
 
@@ -189,6 +214,17 @@ Out[142]: ['1', '3', '8']
 ::
 
     mac = 'AAAA:BBBB:CCCC'
+
+
+In [42]: mac = 'AAAA:BBBB:CCCC'                                                                                 
+
+In [43]: mac_hex = mac.split(':')                                                                               
+
+In [44]: string = str(bin(int(mac_hex[0], 16)) + bin(int(mac_hex[1], 16)) + bin(int(mac_hex[2], 16)))           
+
+In [45]: string.replace('0b','')                                                                                
+Out[45]: '101010101010101010111011101110111100110011001100'
+
 
 Задание 4.8
 ~~~~~~~~~~~
@@ -216,4 +252,19 @@ Out[142]: ['1', '3', '8']
 ::
 
     ip = '192.168.3.1'
+
+
+In [112]: ip = '192.168.3.1'                                                                                    
+
+In [113]: ip = ip.split('.')                                                                                    
+
+In [114]: template = ''' 
+     ...: {0:<8} {1:<8} {2:<8} {3:<8} 
+     ...: {0:08b} {1:08b} {2:08b} {3:08b} 
+     ...: '''                                                                                                   
+
+In [115]: print (template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3])))                                  
+192      168      3        1       
+11000000 10101000 00000011 00000001
+
 

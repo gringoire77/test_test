@@ -77,13 +77,10 @@ Out[19]: 'AAAA.BBBB.CCCC'
 
 
 
-In [27]: config                                                                                                      
-Out[27]: 'switchport trunk allowed vlan 1,3,10,20,30,100'
+In [128]: config = 'switchport trunk allowed vlan 1,3,10,20,30,100'                                             
 
-In [28]: vlans = config.split() [4]                                                                                  
-
-In [29]: vlans                                                                                                       
-Out[29]: '1,3,10,20,30,100'
+In [129]: config.split()[-1].split(',')                                                                         
+Out[129]: ['1', '3', '10', '20', '30', '100']
 
 
 
